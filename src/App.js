@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
+import { AuthProvider } from './contexts/AuthContext';
 import Footer from './components/Footer/Footer.js';
 import Header from './components/Header/Header.js';
 import Welcome from './components/Welcome/Welcome.js';
@@ -8,17 +9,19 @@ import Register from './components/Register/Register.js';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <div className="content">
-        <Routes>
-          <Route path="/*" element={<Welcome />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
+    <AuthProvider>
+      <div className="App">
+        <Header />
+        <div className="content">
+          <Routes>
+            <Route path="/*" element={<Welcome />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </AuthProvider>
   );
 }
 
