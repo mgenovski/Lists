@@ -1,31 +1,21 @@
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+
+import Footer from './components/Footer/Footer.js';
+import Header from './components/Header/Header.js';
+import Welcome from './components/Welcome/Welcome.js';
+import Login from './components/Login/Login.js';
 
 function App() {
   return (
     <div className="App">
-      <header>
-        <div className="logo">
-            <a href="/">LISTS</a>
-            A SoftUni React Project
-        </div>
-        <nav>
-            <a href="/">All lists</a>
-            <a href="/">Login</a>
-            <a href="/">Register</a>
-        </nav>
-    </header>
-    <div className="content">
-        <div className="welcome">
-            <div className="welcome-title">
-                <h1>Hi. This is Lists.</h1>
-                <p>Create, share and use different checklists.</p>
-            </div>
-            <div className="welcome-buttons">
-                <a href="/">View all lists</a>
-            </div>
-        </div>
-    </div>
-    <footer>© Lists. All rights reserved!</footer>
+      <Header />
+      <div className="content">
+        <Routes>
+          <Route path="/*" element={<Welcome />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
+      <Footer />
     </div>
   );
 }

@@ -1,0 +1,9 @@
+
+.login {
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    padding: 50px;
+}

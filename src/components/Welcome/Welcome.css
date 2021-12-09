@@ -1,0 +1,38 @@
+
+.welcome {
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+}
+
+.welcome-title {
+    width: 50%;
+    font-size: 40px;
+    float: left;
+    padding: 60px;
+}
+
+.welcome-title h1 {
+    color: #444;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.welcome-buttons {
+    width: 50%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-buttons a {
+    padding: 30px;
+    background: #0090c5;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 30px;
+    text-decoration: none;
+}

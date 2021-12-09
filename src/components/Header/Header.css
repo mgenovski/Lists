@@ -1,0 +1,41 @@
+
+header {
+    align-items: center;
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+.logo {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.logo a {
+    font-size: 40px;
+    background-color: #FF4486;
+    border-radius: 8px;
+    padding: 15px 10px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+nav {
+    margin-left: auto;
+}
+
+nav a {
+    color: #696969;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ffffff;
+    background-color: #444444;
+}
