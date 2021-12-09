@@ -14,13 +14,16 @@ header {
 }
 
 .logo a {
-    font-size: 40px;
+    font-size: 35px;
     background-color: #FF4486;
     border-radius: 8px;
-    padding: 15px 10px;
+    padding: 10px;
     color: #fff;
     text-decoration: none;
-    font-weight: normal;
+    font-weight: bold;
+}
+.logo span {
+    margin: 0 15px;
 }
 
 nav {

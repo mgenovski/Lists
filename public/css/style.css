@@ -21,3 +21,18 @@ body {
     width: 80%;
     margin: 45px auto;
 }
+
+button.normal {
+    background-color: #0090C5;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 26px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button.normal:hover {
+    background-color: #037ba7;
+}
