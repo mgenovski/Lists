@@ -4,6 +4,7 @@ import Footer from './components/Footer/Footer.js';
 import Header from './components/Header/Header.js';
 import Welcome from './components/Welcome/Welcome.js';
 import Login from './components/Login/Login.js';
+import Register from './components/Register/Register.js';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/*" element={<Welcome />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
       <Footer />

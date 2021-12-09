@@ -36,3 +36,7 @@ button.normal {
 button.normal:hover {
     background-color: #037ba7;
 }
+
+::placeholder {
+    color:    #ccc;
+ }
