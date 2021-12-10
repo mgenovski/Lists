@@ -74,7 +74,7 @@ button.normal:hover {
     margin: 2px 0;
  }
 
- button.edit-list {
+ button.add-list {
     background-color: #245bc2;
     border-radius: 3px;
     padding: 3px 7px;
@@ -84,7 +84,18 @@ button.normal:hover {
     cursor: pointer;
     margin: 2px 0 2px 10px;
  }
-
+ 
+ a.edit-list {
+    background-color: #245bc2;
+    border-radius: 3px;
+    padding: 3px 7px;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin: 2px 0 2px 10px;
+    text-decoration: none;
+ }
  
 .details-button {
     background-color: #0090C5;

@@ -51,7 +51,8 @@ const Details = () => {
             _userId: list._userId,
             _ownerName: list._ownerName,
             _ownerId: list._ownerId,
-            _id: list._id
+            _id: list._id,
+            likes: list.likes
         }
 
         listService.update(listInfo, user.accessToken)
@@ -82,7 +83,8 @@ const Details = () => {
             _userId: list._userId,
             _ownerName: list._ownerName,
             _ownerId: list._ownerId,
-            _id: list._id
+            _id: list._id,
+            likes: list.likes
         }
 
         listService.update(listInfo, user.accessToken)
@@ -119,7 +121,7 @@ const Details = () => {
                             ? (
                                 <>
                                     <button className='delete-list' onClick={deleteListHandler}>Delete list</button>
-                                    <button className='edit-list'>Edit information</button>
+                                    <Link className="edit-list" to={`/edit/${list._id}`}>Edit information</Link>
                                 </>
                             )
                             : ''
@@ -128,7 +130,7 @@ const Details = () => {
                             ? (
                                 <>
                                     <button className='delete-list'>Like</button>
-                                    <button className='edit-list'>Add to my lists</button>
+                                    <button className='add-list'>Add to my lists</button>
                                 </>
                             )
                             : ''

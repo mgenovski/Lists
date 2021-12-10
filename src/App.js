@@ -11,6 +11,7 @@ import Create from './components/Create/Create.js';
 import AllLists from './components/AllLists/AllLists.js';
 import MyLists from './components/MyLists/MyLists.js';
 import Details from './components/Details/Details.js';
+import Edit from './components/Edit/Edit.js';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/all-lists" element={<AllLists />} />
             <Route path="/my-lists" element={<MyLists />} />
             <Route path="/details/:listId" element={<Details />} />
+            <Route path="/edit/:listId" element={<Edit />} />
           </Routes>
         </div>
         <Footer />

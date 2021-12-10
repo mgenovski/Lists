@@ -29,7 +29,7 @@ export const update = async (listData, token) => {
             'content-type': 'application/json',
             'X-Authorization': token,
         },
-        body: JSON.stringify({...listData, likes: []})
+        body: JSON.stringify(listData)
     });
 
     let result = await response.json();
