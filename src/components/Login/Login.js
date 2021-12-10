@@ -21,7 +21,7 @@ const Login = () => {
             .then((authData) => {
                 login(authData);
 
-                navigate('/');
+                navigate('/my-lists');
             })
             .catch(err => {
                 // TODO: show notification

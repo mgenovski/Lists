@@ -4,6 +4,8 @@ const baseUrl = 'http://localhost:3030/data';
 
 export const getAll = () => request(`${baseUrl}/lists?where=shared%3D%221%22`)
 
+export const getMine = (userId) => request(`${baseUrl}/lists?where=_userId%3D%22${userId}%22`)
+
 export const create = async (listData, token) => {
     let response = await fetch(`${baseUrl}/lists`, {
         method: 'POST',

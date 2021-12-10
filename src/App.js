@@ -9,6 +9,7 @@ import Register from './components/Register/Register.js';
 import Logout from './components/Logout/Logout.js';
 import Create from './components/Create/Create.js';
 import AllLists from './components/AllLists/AllLists.js';
+import MyLists from './components/MyLists/MyLists.js';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/create" element={<Create />} />
             <Route path="/all-lists" element={<AllLists />} />
+            <Route path="/my-lists" element={<MyLists />} />
           </Routes>
         </div>
         <Footer />

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Welcome.css';
 
 const Welcome = () => {
@@ -8,7 +9,7 @@ const Welcome = () => {
                 <p>Create, share and use different checklists.</p>
             </div>
             <div className="welcome-buttons">
-                <a href="/">View all lists</a>
+                <Link to="/all-lists">View all lists</Link>
             </div>
         </div>
     );

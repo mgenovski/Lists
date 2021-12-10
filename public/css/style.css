@@ -75,3 +75,22 @@ button.normal:hover {
     margin: 15px 0;
     text-decoration: none;
 }
+
+.catalog-title {
+    margin: 20px auto;
+}
+
+.no-items {
+    width: 50%;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 50px 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.no-items p {
+    font-size: 23px;
+    color: rgb(143, 31, 31);
+    font-weight: bold;
+}
