@@ -1,0 +1,20 @@
+.details {
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 50px;
+}
+.list {
+    width: 50%;
+    float: left;
+    text-align: right;
+    padding: 0 20px;
+}
+.details h2 {
+    margin: 20px 0;
+}
+.info {
+    width: 50%;
+    float: left;
+}

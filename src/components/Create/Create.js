@@ -93,10 +93,10 @@ const Create = () => {
                             <div>
                                 <label htmlFor="category">Category</label>
                                 <select name="category" id="category">
-                                    <option value="shopping">Shopping List</option>
-                                    <option value="packing">Packing List</option>
-                                    <option value="todo">Todo List</option>
-                                    <option value="other">Other Checklist</option>
+                                    <option value="Shopping List">Shopping List</option>
+                                    <option value="Packing List">Packing List</option>
+                                    <option value="Todo List">Todo List</option>
+                                    <option value="Other">Other Checklist</option>
                                 </select>
                             </div>
                             <div>

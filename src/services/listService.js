@@ -21,6 +21,22 @@ export const create = async (listData, token) => {
     return result;
 };
 
+
+export const update = async (listData, token) => {
+    let response = await fetch(`${baseUrl}/lists/${listData._id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': token,
+        },
+        body: JSON.stringify({...listData, likes: []})
+    });
+
+    let result = await response.json();
+
+    return result;
+};
+
 export const getOne = (listId) => {
     return fetch(`${baseUrl}/lists/${listId}`)
         .then(res => res.json())

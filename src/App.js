@@ -10,6 +10,7 @@ import Logout from './components/Logout/Logout.js';
 import Create from './components/Create/Create.js';
 import AllLists from './components/AllLists/AllLists.js';
 import MyLists from './components/MyLists/MyLists.js';
+import Details from './components/Details/Details.js';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/create" element={<Create />} />
             <Route path="/all-lists" element={<AllLists />} />
             <Route path="/my-lists" element={<MyLists />} />
+            <Route path="/details/:listId" element={<Details />} />
           </Routes>
         </div>
         <Footer />
