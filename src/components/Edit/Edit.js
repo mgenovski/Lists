@@ -13,11 +13,17 @@ const Edit = () => {
     const { user } = useAuthContext();
     const { listId } = useParams();
     const [list, setList] = useState('');
+    const [categorySelect, setCategorySelect] = useState('');
+    const [typeSelect, setTypeSelect] = useState('');
+    const [sharedSelect, setSharedSelect] = useState('');
 
     useEffect(() => {
         listService.getOne(listId)
             .then(result => {
                 setList(result);
+                setCategorySelect(result.category);
+                setTypeSelect(result.type);
+                setSharedSelect(result.shared);
             })
             .catch(err => {
                 console.log(err);
@@ -62,6 +68,19 @@ const Edit = () => {
         }
     };
 
+    const changeCategorySelect = (e) => {
+        const newValue = e.currentTarget.value;
+        setCategorySelect(newValue);
+    }
+    const changeTypeSelect = (e) => {
+        const newValue = e.currentTarget.value;
+        setTypeSelect(newValue);
+    }
+    const changeSharedSelect = (e) => {
+        const newValue = e.currentTarget.value;
+        setSharedSelect(newValue);
+    }
+
 
     return (
         <div className="edit">
@@ -77,23 +96,23 @@ const Edit = () => {
                 </div>
                 <div>
                     <label htmlFor="category">Category</label>
-                    <select name="category" id="category" defaultValue={list.category}>
+                    <select name="category" id="category" value={categorySelect} onChange={changeCategorySelect}>
                         <option value="Shopping List">Shopping List</option>
                         <option value="Packing List">Packing List</option>
                         <option value="Todo List">Todo List</option>
-                        <option value="Other">Other Checklist</option>
+                        <option value="Other Checklist">Other Checklist</option>
                     </select>
                 </div>
                 <div>
                     <label htmlFor="type">Type</label>
-                    <select name="type" id="type" defaultValue={list.type}>
+                    <select name="type" id="type" value={typeSelect} onChange={changeTypeSelect}>
                         <option value="ul">Unordered List</option>
                         <option value="ol">Ordered List</option>
                     </select>
                 </div>
                 <div>
                     <label htmlFor="shared">Sharing</label>
-                    <select name="shared" id="shared" defaultValue={list.shared}>
+                    <select name="shared" id="shared" value={sharedSelect} onChange={changeSharedSelect}>
                         <option value="0">Private List</option>
                         <option value="1">Public List</option>
                     </select>
