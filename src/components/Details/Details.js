@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import * as listService from '../../services/listService.js';
 import { useAuthContext } from '../../contexts/AuthContext';
@@ -17,7 +17,7 @@ const Item = ({ item, index, userId, onItemRemove }) => {
 
 
 const Details = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const { user } = useAuthContext();
     const { listId } = useParams();
     const [list, setList] = useState('');
@@ -62,6 +62,13 @@ const Details = () => {
             })
     };
 
+    const deleteListHandler = () => {
+        listService.del(list._id, user.accessToken)
+            .then(result => {
+                navigate('/my-lists');
+            })
+    }
+
     const onItemRemove = (index) => {
         const newItems = [...list.items];
         newItems.splice(index, 1);
@@ -85,6 +92,8 @@ const Details = () => {
             })
     };
 
+
+
     const addForm = (
         <form onSubmit={onItemAdd}>
             <div><input type="text" id="item" name="item" placeholder="Item..." /></div>
@@ -105,6 +114,26 @@ const Details = () => {
                     <p>Description: {list.description}</p>
                     <p>Category: {list.category}</p>
                     <p>Created by: {list._ownerName}</p>
+                    <div>
+                        {user._id === list._userId
+                            ? (
+                                <>
+                                    <button className='delete-list' onClick={deleteListHandler}>Delete list</button>
+                                    <button className='edit-list'>Edit information</button>
+                                </>
+                            )
+                            : ''
+                        }
+                        {user._id && user._id !== list._ownerId
+                            ? (
+                                <>
+                                    <button className='delete-list'>Like</button>
+                                    <button className='edit-list'>Add to my lists</button>
+                                </>
+                            )
+                            : ''
+                        }
+                    </div>
                 </div>
             </div>
         </>

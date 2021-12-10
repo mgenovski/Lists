@@ -63,6 +63,28 @@ button.normal:hover {
     margin: 2px 10px;
  }
 
+ button.delete-list {
+    background-color: #a82222;
+    border-radius: 3px;
+    padding: 3px 7px;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin: 2px 0;
+ }
+
+ button.edit-list {
+    background-color: #245bc2;
+    border-radius: 3px;
+    padding: 3px 7px;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin: 2px 0 2px 10px;
+ }
+
  
 .details-button {
     background-color: #0090C5;

@@ -42,7 +42,7 @@ export const getOne = (listId) => {
         .then(res => res.json())
 };
 
-export const destroy = (listId, token) => {
+export const del = (listId, token) => {
     return fetch(`${baseUrl}/lists/${listId}`, {
         method: 'DELETE',
         headers: {
