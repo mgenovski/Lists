@@ -40,3 +40,25 @@ button.normal:hover {
 ::placeholder {
     color:    #ccc;
  }
+
+ button.small {
+    background-color: #418d47;
+    border-radius: 8px;
+    padding: 7px 15px;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+ }
+
+ button.del {
+    background-color: #a82222;
+    border-radius: 3px;
+    padding: 3px 7px;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin: 2px 10px;
+ }

@@ -1,15 +1,46 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import * as listService from '../../services/listService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import Login from '../Login/Login.js';
 
 import './Create.css';
 
+const Item = ({ item, index, removeItem }) => {
+    return (
+        <div>
+            <span>{item.text}</span>
+            <button className="del" onClick={() => removeItem(index)}>✕</button>
+        </div>
+    );
+}
+
 const Create = () => {
     const { user } = useAuthContext();
 
     const navigate = useNavigate();
 
+    const [items, setItems] = useState([]);
+
+    const [value, setValue] = useState("");
+
+    const addItem = text => {
+        const newItem = [...items, { text, isDone: false }];
+        setItems(newItem);
+    };
+
+    const removeItem = index => {
+        const newItems = [...items];
+        newItems.splice(index, 1);
+        setItems(newItems);
+    };
+
+    const onItemAdd = e => {
+        e.preventDefault();
+        if (!value) return;
+        addItem(value);
+        setValue("");
+    };
     const onListCreate = (e) => {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
@@ -20,45 +51,66 @@ const Create = () => {
         let type = formData.get('type');
         let shared = formData.get('shared');
 
-        listService.create({
-            title,
-            description,
-            category,
-            type,
-            shared
-        }, user.accessToken)
-            .then(result => {
-                navigate('/my-lists');
-            })
+        //TODO Validation and notification
+        if (title === '' || description === '' || items.length < 2) {
+            console.log('All fields are required. Add at least 2 items in the list.')
+        } else {
+
+            listService.create({
+                title,
+                description,
+                category,
+                type,
+                shared,
+                items,
+                _userId: user._id,
+                _ownerName: user.name
+            }, user.accessToken)
+                .then(result => {
+                    navigate('/my-lists');
+                })
+        }
     }
 
 
     return (
-
         <div className="create">
             {user.accessToken
                 ?
                 <>
-                        
+
                     <div className='create-form'>
-                        <h1>Create List</h1>    
+                        <h1>Create List</h1>
                         <form onSubmit={onListCreate} method="POST">
                             <div>
                                 <label htmlFor="title">Title</label>
-                                <input type="text" id="title" name="title" placeholder="Ex. Birthday Shopping List..."></input>
+                                <input type="text" id="title" name="title" placeholder="Ex. Birthday Shopping List..." />
                             </div>
                             <div>
                                 <label htmlFor="description">Description</label>
-                                <input type="text" id="description" name="description" placeholder="Short description..."></input>
+                                <input type="text" id="description" name="description" placeholder="Short description..." />
                             </div>
                             <div>
                                 <label htmlFor="category">Category</label>
-
                                 <select name="category" id="category">
-                                    <option value="volvo">Shopping List</option>
-                                    <option value="saab">Packing List</option>
-                                    <option value="mercedes">Todo List</option>
-                                    <option value="audi">Other Checklist</option>
+                                    <option value="shopping">Shopping List</option>
+                                    <option value="packing">Packing List</option>
+                                    <option value="todo">Todo List</option>
+                                    <option value="other">Other Checklist</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label htmlFor="type">Type</label>
+                                <select name="type" id="type">
+                                    <option value="ul">Unordered List</option>
+                                    <option value="ol">Ordered List</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label htmlFor="shared">Sharing</label>
+                                <select name="shared" id="shared">
+                                    <option value="0">Private List</option>
+                                    <option value="1">Public List</option>
                                 </select>
                             </div>
                             <button className='normal'>Create</button>
@@ -66,7 +118,12 @@ const Create = () => {
                     </div>
                     <div className='create-list'>
                         <h2>Add items to the list</h2>
-                        </div>
+                        {items.map((item, index) => (<Item key={index} index={index} item={item} removeItem={removeItem} />))}
+                        <form onSubmit={onItemAdd}>
+                            <div><input type="text" id="item" name="item" placeholder="Item..." value={value} onChange={e => setValue(e.target.value)} /></div>
+                            <div><button className='small'>Add</button></div>
+                        </form>
+                    </div>
                 </>
                 : <Login />
             }
