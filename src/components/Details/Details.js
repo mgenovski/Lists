@@ -21,11 +21,20 @@ const Details = () => {
     const { user } = useAuthContext();
     const { listId } = useParams();
     const [list, setList] = useState('');
+    const [likes, setLikes] = useState([]);
 
     useEffect(() => {
         listService.getOne(listId)
             .then(result => {
                 setList(result);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+        listService.getLikes(listId)
+            .then(result => {
+                setLikes(result.map(l=>l._ownerId));
             })
             .catch(err => {
                 console.log(err);
@@ -51,8 +60,7 @@ const Details = () => {
             _userId: list._userId,
             _ownerName: list._ownerName,
             _ownerId: list._ownerId,
-            _id: list._id,
-            likes: list.likes
+            _id: list._id
         }
 
         listService.update(listInfo, user.accessToken)
@@ -83,14 +91,26 @@ const Details = () => {
             _userId: list._userId,
             _ownerName: list._ownerName,
             _ownerId: list._ownerId,
-            _id: list._id,
-            likes: list.likes
+            _id: list._id
         }
 
         listService.update(listInfo, user.accessToken)
             .then(result => {
                 setList(listInfo);
-                // navigate(`/details/${list._id}`);
+            })
+    };
+
+    const likeHandler = e => {
+
+        if(likes.includes(user._id)) {
+            console.log('You can only like once!');
+            return;
+        }
+        const newLikes = [...likes, user._id];
+
+        listService.like(list._id, user.accessToken)
+            .then(result => {
+                setLikes(newLikes);
             })
     };
 
@@ -116,6 +136,7 @@ const Details = () => {
                     <p>Description: {list.description}</p>
                     <p>Category: {list.category}</p>
                     <p>Created by: {list._ownerName}</p>
+                    <p>Likes: {likes?.length}</p>
                     <div>
                         {user._id === list._userId
                             ? (
@@ -129,7 +150,7 @@ const Details = () => {
                         {user._id && user._id !== list._ownerId
                             ? (
                                 <>
-                                    <button className='delete-list'>Like</button>
+                                    <button className='delete-list' onClick={likeHandler}>Like</button>
                                     <button className='add-list'>Add to my lists</button>
                                 </>
                             )
