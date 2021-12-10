@@ -1,0 +1,17 @@
+.all-lists {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card {
+    flex: 0 1 calc(33% - 1em);
+    background: #fff;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 7px;
+}
+
+.card div {
+    margin-top: 50px;
+}

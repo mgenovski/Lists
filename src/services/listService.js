@@ -2,7 +2,7 @@ import { request } from './requester';
 
 const baseUrl = 'http://localhost:3030/data';
 
-export const getAll = () => request(`${baseUrl}/lists`)
+export const getAll = () => request(`${baseUrl}/lists?where=shared%3D%221%22`)
 
 export const create = async (listData, token) => {
     let response = await fetch(`${baseUrl}/lists`, {

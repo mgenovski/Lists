@@ -8,6 +8,7 @@ import Login from './components/Login/Login.js';
 import Register from './components/Register/Register.js';
 import Logout from './components/Logout/Logout.js';
 import Create from './components/Create/Create.js';
+import AllLists from './components/AllLists/AllLists.js';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/create" element={<Create />} />
+            <Route path="/all-lists" element={<AllLists />} />
           </Routes>
         </div>
         <Footer />
