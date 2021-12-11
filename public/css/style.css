@@ -127,3 +127,11 @@ button.normal:hover {
     color: rgb(143, 31, 31);
     font-weight: bold;
 }
+
+.is-done {
+    text-decoration: line-through;
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}

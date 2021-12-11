@@ -5,11 +5,13 @@ import * as listService from '../../services/listService.js';
 import { useAuthContext } from '../../contexts/AuthContext';
 
 import './Details.css';
-const Item = ({ item, index, userId, onItemRemove }) => {
+const Item = ({ item, index, userId, onItemRemove, onItemCheck }) => {
     const { user } = useAuthContext();
     return (
         <div>
-            <span>{item.text}</span>
+            <span className={user._id === userId && item.isDone ? 'is-done' : ''} onClick={() => onItemCheck(index)}>
+                <span className={user._id === userId ? 'pointer-cursor' : ''}>{item.text}</span>
+            </span>
             {user._id === userId ? <button className="del" onClick={() => onItemRemove(index)}>✕</button> : ''}
         </div>
     )
@@ -34,7 +36,7 @@ const Details = () => {
 
         listService.getLikes(listId)
             .then(result => {
-                setLikes(result.map(l=>l._ownerId));
+                setLikes(result.map(l => l._ownerId));
             })
             .catch(err => {
                 console.log(err);
@@ -100,6 +102,31 @@ const Details = () => {
             })
     };
 
+    const onItemCheck = (index) => {
+        if (user._id !== list._userId) {
+            return;
+        }
+        const newItems = [...list.items];
+        newItems[index].isDone = newItems[index].isDone === true ? false : true;
+        const listInfo = {
+            title: list.title,
+            description: list.description,
+            category: list.category,
+            type: list.type,
+            shared: list.shared,
+            items: newItems,
+            _userId: list._userId,
+            _ownerName: list._ownerName,
+            _ownerId: list._ownerId,
+            _id: list._id
+        }
+
+        listService.update(listInfo, user.accessToken)
+            .then(result => {
+                setList(listInfo);
+            })
+    };
+
     const addToMyListsHandler = () => {
         const listInfo = {
             title: list.title,
@@ -122,7 +149,7 @@ const Details = () => {
 
     const likeHandler = e => {
 
-        if(likes.includes(user._id)) {
+        if (likes.includes(user._id)) {
             console.log('You can only like once!');
             return;
         }
@@ -148,7 +175,7 @@ const Details = () => {
             <div className='details'>
                 <div className='list'>
                     <h2>{list.title}</h2>
-                    {list.items ? list.items.map((item, index) => (<Item key={index} userId={list._userId} item={item} index={index} onItemRemove={onItemRemove} />)) : null}
+                    {list.items ? list.items.map((item, index) => (<Item key={index} userId={list._userId} item={item} index={index} onItemRemove={onItemRemove} onItemCheck={onItemCheck} />)) : null}
                     {user._id === list._userId ? addForm : ''}
                 </div>
                 <div className='info'>
@@ -171,7 +198,7 @@ const Details = () => {
                             ? (
                                 <>
                                     <button className='delete-list' onClick={likeHandler}>Like</button>
-                                    <button className='add-list'  onClick={addToMyListsHandler}>Add to my lists</button>
+                                    <button className='add-list' onClick={addToMyListsHandler}>Add to my lists</button>
                                 </>
                             )
                             : ''
