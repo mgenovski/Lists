@@ -100,6 +100,26 @@ const Details = () => {
             })
     };
 
+    const addToMyListsHandler = () => {
+        const listInfo = {
+            title: list.title,
+            description: list.description,
+            category: list.category,
+            type: list.type,
+            shared: '0',
+            items: list.items,
+            _userId: user._id,
+            _ownerName: list._ownerName,
+            _ownerId: list._ownerId,
+            _id: list._id
+        }
+
+        listService.create(listInfo, user.accessToken)
+            .then(result => {
+                navigate('/my-lists');
+            })
+    }
+
     const likeHandler = e => {
 
         if(likes.includes(user._id)) {
@@ -151,7 +171,7 @@ const Details = () => {
                             ? (
                                 <>
                                     <button className='delete-list' onClick={likeHandler}>Like</button>
-                                    <button className='add-list'>Add to my lists</button>
+                                    <button className='add-list'  onClick={addToMyListsHandler}>Add to my lists</button>
                                 </>
                             )
                             : ''
