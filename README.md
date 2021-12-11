@@ -18,4 +18,4 @@ Runs the [SoftUni Practice Server](https://github.com/softuni-practice-server/so
 
 ## Learn More
 
-With Lists you can create, share and use other people's checklists. 
+With Lists you can create, share and use other peoples' checklists. 
