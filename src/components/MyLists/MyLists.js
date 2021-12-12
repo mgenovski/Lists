@@ -25,7 +25,7 @@ const MyLists = () => {
         <>  <h1 className="catalog-title">My lists</h1>
             {lists.length > 0
                 ? ( 
-                    <div className="all-lists">
+                    <div className="my-lists">
                         {lists.map(x => <ListCard key={x._id} list={x} />)}
                     </div>
                 )
