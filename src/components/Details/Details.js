@@ -128,13 +128,16 @@ const Details = () => {
     };
 
     const addToMyListsHandler = () => {
+
+        const uncheckedItems = list.items.map(x=>x={text: x.text, isDone: false});
+        
         const listInfo = {
             title: list.title,
             description: list.description,
             category: list.category,
             type: list.type,
             shared: '0',
-            items: list.items,
+            items: uncheckedItems,
             _userId: user._id,
             _ownerName: list._ownerName,
             _ownerId: list._ownerId,
