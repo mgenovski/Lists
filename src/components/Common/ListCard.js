@@ -5,7 +5,7 @@ const ListCard = ({ list }) => {
         <article className="card">
             <h2>{list.title}</h2>
             <p>{list.description}</p>
-            <span className="created-by">Created by {list._ownerName}</span>
+            {list._ownerName ? (<span className="created-by">Created by {list._ownerName}</span>) : ''}
             <div>
                 <Link className="details-button" to={`/details/${list._id}`}>Details</Link>
             </div>
