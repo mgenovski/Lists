@@ -153,6 +153,10 @@ const Details = () => {
             console.log('You can only like once!');
             return;
         }
+        if (list._userId === user._userId) {
+            console.log('You can not like your own list!');
+            return;
+        }
         const newLikes = [...likes, user._id];
 
         listService.like(list._id, user.accessToken)
@@ -182,7 +186,7 @@ const Details = () => {
                     <h2>Information</h2>
                     <p>Description: {list.description}</p>
                     <p>Category: {list.category}</p>
-                    <p>Created by: {list._ownerName}</p>
+                    {list._ownerName ? (<p>Created by: {list._ownerName}</p>): ''}
                     <p>Likes: {likes?.length}</p>
                     <div>
                         {user._id === list._userId
