@@ -93,29 +93,41 @@ const Details = () => {
                 }
             ]
         });
-
     }
 
     const onItemRemove = (index) => {
-        const newItems = [...list.items];
-        newItems.splice(index, 1);
-        const listInfo = {
-            title: list.title,
-            description: list.description,
-            category: list.category,
-            type: list.type,
-            shared: list.shared,
-            items: newItems,
-            _userId: list._userId,
-            _ownerName: list._ownerName,
-            _ownerId: list._ownerId,
-            _id: list._id
-        }
 
-        listService.update(listInfo, user.accessToken)
-            .then(result => {
-                setList(listInfo);
-            })
+        alert.show("This action can not be reversed!", {
+            title: "Are you sure you want to delete this?",
+            closeCopy: "Cancel",
+            actions: [
+                {
+                    copy: "Delete",
+                    onClick: () => {
+                        const newItems = [...list.items];
+                        newItems.splice(index, 1);
+                        const listInfo = {
+                            title: list.title,
+                            description: list.description,
+                            category: list.category,
+                            type: list.type,
+                            shared: list.shared,
+                            items: newItems,
+                            _userId: list._userId,
+                            _ownerName: list._ownerName,
+                            _ownerId: list._ownerId,
+                            _id: list._id
+                        }
+
+                        listService.update(listInfo, user.accessToken)
+                            .then(result => setList(listInfo))
+                            .catch(err => alert.show(err));
+                    }
+                }
+            ]
+        });
+
+
     };
 
     const onItemCheck = (index) => {
