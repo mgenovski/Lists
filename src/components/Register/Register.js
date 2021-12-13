@@ -19,8 +19,6 @@ const Register = () => {
         let name = formData.get('name');
         let passwordConfirm = formData.get('password-confirm');
 
-        //TODO Validation
-
         if (password !== passwordConfirm) {
             alert.show("Passwords do not match!");
             return;
@@ -35,12 +33,9 @@ const Register = () => {
         authService.register(email, password, name)
             .then(authData => {
                 login(authData);
-
                 navigate('/');
             })
-            .catch(err=> {
-                alert.show(err);
-            });
+            .catch(err => alert.show(err));
     }
 
     return (
