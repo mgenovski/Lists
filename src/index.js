@@ -2,13 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
+import { Provider as AlertProvider } from 'react-alert'
+import AlertMUITemplate from "react-alert-template-mui";
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <BrowserRouter>
+    <AlertProvider template={AlertMUITemplate}>
     <App />
-  </BrowserRouter>,
+  </AlertProvider>
+  </BrowserRouter >,
   document.getElementById('root')
 );
 
