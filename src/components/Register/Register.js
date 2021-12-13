@@ -2,11 +2,13 @@ import { useNavigate } from 'react-router';
 
 import * as authService from '../../services/authService';
 import { useAuthContext } from '../../contexts/AuthContext';
+import { useAlert } from 'react-alert';
 import './Register.css';
 
 const Register = () => {
     const navigate = useNavigate();
     const { login } = useAuthContext();
+    const alert = useAlert();
 
     const registerSubmitHandler = (e) => {
         e.preventDefault();
@@ -18,17 +20,27 @@ const Register = () => {
         let passwordConfirm = formData.get('password-confirm');
 
         //TODO Validation
-        if(password===passwordConfirm && email!=='' && password!=='' && name!=='') {
-        authService.register(email, password, name)   
+
+        if (password !== passwordConfirm) {
+            alert.show("Passwords do not match!");
+            return;
+        }
+
+        //ToDO Email validation
+        if (email === '' || password === '' || name === '') {
+            alert.show("All fields are required!");
+            return;
+        }
+
+        authService.register(email, password, name)
             .then(authData => {
                 login(authData);
-                
+
                 navigate('/');
+            })
+            .catch(err=> {
+                alert.show(err);
             });
-        } else {
-            console.log('All fields are required!');
-            //TODO add notification
-        }
     }
 
     return (
