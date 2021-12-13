@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import * as listService from '../../services/listService.js';
 import { useAuthContext } from '../../contexts/AuthContext';
+import { useAlert } from 'react-alert';
 
 import './Details.css';
 const Item = ({ item, index, userId, onItemRemove, onItemCheck }) => {
@@ -24,6 +25,7 @@ const Details = () => {
     const { listId } = useParams();
     const [list, setList] = useState('');
     const [likes, setLikes] = useState([]);
+    const alert = useAlert();
 
     useEffect(() => {
         listService.getOne(listId)
@@ -80,6 +82,20 @@ const Details = () => {
             })
     }
 
+    const deleteConfirmAlert = () => {
+        alert.show("This action can not be reversed!", {
+            title: "Are you sure you want to delete this?",
+            closeCopy: "Cancel",
+            actions: [
+                {
+                    copy: "Delete",
+                    onClick: deleteListHandler
+                }
+            ]
+        });
+
+    }
+
     const onItemRemove = (index) => {
         const newItems = [...list.items];
         newItems.splice(index, 1);
@@ -129,8 +145,8 @@ const Details = () => {
 
     const addToMyListsHandler = () => {
 
-        const uncheckedItems = list.items.map(x=>x={text: x.text, isDone: false});
-        
+        const uncheckedItems = list.items.map(x => x = { text: x.text, isDone: false });
+
         const listInfo = {
             title: list.title,
             description: list.description,
@@ -189,13 +205,13 @@ const Details = () => {
                     <h2>Information</h2>
                     <p>Description: {list.description}</p>
                     <p>Category: {list.category}</p>
-                    {list._ownerName ? (<p>Created by: {list._ownerName}</p>): ''}
+                    {list._ownerName ? (<p>Created by: {list._ownerName}</p>) : ''}
                     <p>Likes: {likes?.length}</p>
                     <div>
                         {user._id === list._userId
                             ? (
                                 <>
-                                    <button className='delete-list' onClick={deleteListHandler}>Delete list</button>
+                                    <button className='delete-list' onClick={deleteConfirmAlert}>Delete list</button>
                                     <Link className="edit-list" to={`/edit/${list._id}`}>Edit information</Link>
                                 </>
                             )
