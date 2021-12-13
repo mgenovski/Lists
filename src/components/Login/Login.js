@@ -1,13 +1,14 @@
 import { useNavigate } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 
 import { useAuthContext } from '../../contexts/AuthContext';
-
 import * as authService from '../../services/authService';
 import './Login.css';
 
 const Login = () => {
     const { login } = useAuthContext();
     const navigate = useNavigate();
+    const alert = useAlert();
 
     const onLoginHandler = (e) => {
         e.preventDefault();
@@ -17,16 +18,18 @@ const Login = () => {
         let email = formData.get('email');
         let password = formData.get('password');
 
+        if (email === '' || password === '') {
+            alert.show("All fields are required!");
+            return;
+        }
+
         authService.login(email, password)
             .then((authData) => {
                 login(authData);
 
                 navigate('/my-lists');
             })
-            .catch(err => {
-                // TODO: show notification
-                console.log(err);
-            });
+            .catch(err => alert.show(err));
     }
 
     return (
