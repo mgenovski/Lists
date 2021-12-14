@@ -64,3 +64,20 @@ export const like = (listId, token) => {
         body: JSON.stringify({listId})
     }).then(res => res.json());
 };
+
+const getLikeId = async (listId, userId) => {
+    const response = await fetch(`${baseUrl}/likes?where=listId%3D%22${listId}%22`);
+    const result = await response.json();
+    const index = result.find(e=>e._ownerId===userId);
+    return index._id;
+}
+
+export const dislike = async (listId, token, userId) => {
+    const likeId = await getLikeId(listId, userId);
+    return fetch(`${baseUrl}/likes/${likeId}`, {
+        method: 'DELETE',
+        headers: {
+            'X-Authorization': token
+        }
+    }).then(res => res.json());
+};

@@ -181,7 +181,7 @@ const Details = () => {
     const likeHandler = e => {
 
         if (likes.includes(user._id)) {
-            console.log('You can only like once!');
+            alert.show('You can only like once!');
             return;
         }
         if (list._userId === user._userId) {
@@ -191,6 +191,15 @@ const Details = () => {
         const newLikes = [...likes, user._id];
 
         listService.like(list._id, user.accessToken)
+            .then(result => {
+                setLikes(newLikes);
+            })
+    };
+
+    const dislikeHandler = e => {
+        const newLikes = [...likes];
+        newLikes.splice(newLikes.indexOf(user._id), 1);
+        listService.dislike(list._id, user.accessToken, user._id)
             .then(result => {
                 setLikes(newLikes);
             })
@@ -232,7 +241,9 @@ const Details = () => {
                         {user._id && user._id !== list._ownerId
                             ? (
                                 <>
-                                    <button className='delete-list' onClick={likeHandler}>Like</button>
+                                    {likes.includes(user._id) 
+                                        ? (<button className='delete-list' onClick={dislikeHandler}>Dislike</button>)
+                                        : (<button className='delete-list' onClick={likeHandler}>Like</button>)}
                                     <button className='add-list' onClick={addToMyListsHandler}>Add to my lists</button>
                                 </>
                             )
