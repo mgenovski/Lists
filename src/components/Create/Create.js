@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useAlert } from 'react-alert';
 import * as listService from '../../services/listService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import Login from '../Login/Login.js';
@@ -17,12 +18,10 @@ const Item = ({ item, index, removeItem }) => {
 
 const Create = () => {
     const { user } = useAuthContext();
-
     const navigate = useNavigate();
-
     const [items, setItems] = useState([]);
-
     const [value, setValue] = useState("");
+    const alert = useAlert();
 
     const addItem = text => {
         const newItem = [...items, { text, isDone: false }];
@@ -52,24 +51,30 @@ const Create = () => {
         let shared = formData.get('shared');
 
         //TODO Validation and notification
-        if (title === '' || description === '' || items.length < 2) {
-            console.log('All fields are required. Add at least 2 items in the list.')
-        } else {
-
-            listService.create({
-                title,
-                description,
-                category,
-                type,
-                shared,
-                items,
-                _userId: user._id,
-                _ownerName: user.name
-            }, user.accessToken)
-                .then(result => {
-                    navigate('/my-lists');
-                })
+        if (title === '' || description === '') {
+            alert.show('All fields are required.');
+            return;
         }
+
+        if(items.length < 2) {
+            alert.show('Add at least 2 items in the list.');
+            return;
+        }
+
+        listService.create({
+            title,
+            description,
+            category,
+            type,
+            shared,
+            items,
+            _userId: user._id,
+            _ownerName: user.name
+        }, user.accessToken)
+            .then(result => {
+                navigate('/my-lists');
+            })
+
     }
 
 
