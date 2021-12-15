@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "playwright-chromium": "^1.17.1",
     "react": "^17.0.2",
     "react-alert": "^7.0.3",
     "react-alert-template-mui": "^1.0.7",
@@ -19,7 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node ./server/server.js"
+    "server": "node ./server/server.js",
+    "populate-data": "node ./startData/populate.js"
   },
   "eslintConfig": {
     "extends": [
