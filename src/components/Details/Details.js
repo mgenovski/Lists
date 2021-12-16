@@ -51,7 +51,10 @@ const Details = () => {
         const form = e.currentTarget;
         let formData = new FormData(form);
         const item = formData.get('item');
-        if (item === '') return;
+        if (item.length < 2) {
+            alert.show('List item should be at least two symbols long.');
+            return;
+        }
         const newItems = [...list.items, { text: item, isDone: false }];
 
         const listInfo = {
@@ -76,20 +79,18 @@ const Details = () => {
     };
 
     const deleteListHandler = () => {
-        listService.del(list._id, user.accessToken)
-            .then(result => {
-                navigate('/my-lists');
-            })
-    }
-
-    const deleteConfirmAlert = () => {
         alert.show("This action can not be reversed!", {
             title: "Are you sure you want to delete this?",
             closeCopy: "Cancel",
             actions: [
                 {
                     copy: "Delete",
-                    onClick: deleteListHandler
+                    onClick: () => {
+                        listService.del(list._id, user.accessToken)
+                            .then(result => {
+                                navigate('/my-lists');
+                            })
+                    }
                 }
             ]
         });
@@ -156,26 +157,36 @@ const Details = () => {
     };
 
     const addToMyListsHandler = () => {
+        alert.show(`${list.title} will be added to your list!`, {
+            title: "Are you sure you want to add this to your lists?",
+            closeCopy: "Cancel",
+            actions: [
+                {
+                    copy: "Add",
+                    onClick: () => {
+                        const uncheckedItems = list.items.map(x => x = { text: x.text, isDone: false });
 
-        const uncheckedItems = list.items.map(x => x = { text: x.text, isDone: false });
+                        const listInfo = {
+                            title: list.title,
+                            description: list.description,
+                            category: list.category,
+                            type: list.type,
+                            shared: '0',
+                            items: uncheckedItems,
+                            _userId: user._id,
+                            _ownerName: list._ownerName,
+                            _ownerId: list._ownerId,
+                            _id: list._id
+                        }
 
-        const listInfo = {
-            title: list.title,
-            description: list.description,
-            category: list.category,
-            type: list.type,
-            shared: '0',
-            items: uncheckedItems,
-            _userId: user._id,
-            _ownerName: list._ownerName,
-            _ownerId: list._ownerId,
-            _id: list._id
-        }
-
-        listService.create(listInfo, user.accessToken)
-            .then(result => {
-                navigate('/my-lists');
-            })
+                        listService.create(listInfo, user.accessToken)
+                            .then(result => {
+                                navigate('/my-lists');
+                            })
+                    }
+                }
+            ]
+        });
     }
 
     const likeHandler = e => {
@@ -232,7 +243,7 @@ const Details = () => {
                         {user._id === list._userId
                             ? (
                                 <>
-                                    <button className='delete-list' onClick={deleteConfirmAlert}>Delete list</button>
+                                    <button className='delete-list' onClick={deleteListHandler}>Delete list</button>
                                     <Link className="edit-list" to={`/edit/${list._id}`}>Edit information</Link>
                                 </>
                             )
@@ -241,7 +252,7 @@ const Details = () => {
                         {user._id && user._id !== list._ownerId
                             ? (
                                 <>
-                                    {likes.includes(user._id) 
+                                    {likes.includes(user._id)
                                         ? (<button className='delete-list' onClick={dislikeHandler}>Dislike</button>)
                                         : (<button className='delete-list' onClick={likeHandler}>Like</button>)}
                                     <button className='add-list' onClick={addToMyListsHandler}>Add to my lists</button>
