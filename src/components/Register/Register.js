@@ -33,7 +33,7 @@ const Register = () => {
         authService.register(email, password, name)
             .then(authData => {
                 login(authData);
-                navigate('/');
+                navigate('/my-lists');
             })
             .catch(err => alert.show(err));
     }
