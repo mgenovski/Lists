@@ -147,7 +147,7 @@ async function populate() {
     page.click('#root > div > header > nav > span > a:nth-child(2)');
     await page.waitForTimeout(interval);
     await page.fill('[name="title"]', 'Ultimate Bucket List');
-    await page.fill('#description', 'Shopping list for this year\'s Christmass dinner party.');
+    await page.fill('#description', 'My bucket list.');
     await page.selectOption('[name="category"]', { label: 'Other Checklist' });
     await page.selectOption('[name="shared"]', { label: 'Public List' });
     
