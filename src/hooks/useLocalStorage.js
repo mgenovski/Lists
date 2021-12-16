@@ -15,7 +15,6 @@ const useLocalStorage = (key, initialValue) => {
     });
 
     const setItem = (value) => {
-        // TODO: add support for functions
         try {
             localStorage.setItem(key, JSON.stringify(value))
 
