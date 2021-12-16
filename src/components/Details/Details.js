@@ -4,20 +4,8 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import * as listService from '../../services/listService.js';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useAlert } from 'react-alert';
-
+import Item from './Item.js';
 import './Details.css';
-const Item = ({ item, index, userId, onItemRemove, onItemCheck }) => {
-    const { user } = useAuthContext();
-    return (
-        <div>
-            <span className={user._id === userId && item.isDone ? 'is-done' : ''} onClick={() => onItemCheck(index)}>
-                <span className={user._id === userId ? 'pointer-cursor' : ''}>{item.text}</span>
-            </span>
-            {user._id === userId ? <button className="del" onClick={() => onItemRemove(index)}>✕</button> : ''}
-        </div>
-    )
-}
-
 
 const Details = () => {
     const navigate = useNavigate();
