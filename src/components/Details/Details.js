@@ -34,36 +34,17 @@ const Details = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const onItemAdd = e => {
-        e.preventDefault();
-        const form = e.currentTarget;
-        let formData = new FormData(form);
-        const item = formData.get('item');
-        if (item.length < 2) {
-            alert.show('List item should be at least two symbols long.');
-            return;
-        }
-        const newItems = [...list.items, { text: item, isDone: false }];
-
-        const listInfo = {
-            title: list.title,
-            description: list.description,
-            category: list.category,
-            type: list.type,
-            shared: list.shared,
-            items: newItems,
-            _userId: list._userId,
-            _ownerName: list._ownerName,
-            _ownerId: list._ownerId,
-            _id: list._id
-        }
-
-        listService.update(listInfo, user.accessToken)
-            .then(result => {
-                setList(listInfo);
-                form.reset();
-                // navigate(`/details/${list._id}`);
-            })
+    const listInfo = {
+        title: list.title,
+        description: list.description,
+        category: list.category,
+        type: list.type,
+        shared: list.shared,
+        items: list.items,
+        _userId: list._userId,
+        _ownerName: list._ownerName,
+        _ownerId: list._ownerId,
+        _id: list._id
     };
 
     const deleteListHandler = () => {
@@ -84,8 +65,25 @@ const Details = () => {
         });
     }
 
-    const onItemRemove = (index) => {
+    const onItemAdd = e => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        let formData = new FormData(form);
+        const item = formData.get('item');
+        if (item.length < 2) {
+            alert.show('List item should be at least two symbols long.');
+            return;
+        }
 
+        listInfo.items = [...list.items, { text: item, isDone: false }];
+        listService.update(listInfo, user.accessToken)
+            .then(result => {
+                setList(listInfo);
+                form.reset();
+            })
+    };
+
+    const onItemRemove = (index) => {
         alert.show("This action can not be reversed!", {
             title: "Are you sure you want to delete this?",
             closeCopy: "Cancel",
@@ -95,18 +93,7 @@ const Details = () => {
                     onClick: () => {
                         const newItems = [...list.items];
                         newItems.splice(index, 1);
-                        const listInfo = {
-                            title: list.title,
-                            description: list.description,
-                            category: list.category,
-                            type: list.type,
-                            shared: list.shared,
-                            items: newItems,
-                            _userId: list._userId,
-                            _ownerName: list._ownerName,
-                            _ownerId: list._ownerId,
-                            _id: list._id
-                        }
+                        listInfo.items = newItems;
 
                         listService.update(listInfo, user.accessToken)
                             .then(result => setList(listInfo))
@@ -115,8 +102,6 @@ const Details = () => {
                 }
             ]
         });
-
-
     };
 
     const onItemCheck = (index) => {
@@ -125,18 +110,7 @@ const Details = () => {
         }
         const newItems = [...list.items];
         newItems[index].isDone = newItems[index].isDone === true ? false : true;
-        const listInfo = {
-            title: list.title,
-            description: list.description,
-            category: list.category,
-            type: list.type,
-            shared: list.shared,
-            items: newItems,
-            _userId: list._userId,
-            _ownerName: list._ownerName,
-            _ownerId: list._ownerId,
-            _id: list._id
-        }
+        listInfo.items = newItems;
 
         listService.update(listInfo, user.accessToken)
             .then(result => {
@@ -153,19 +127,9 @@ const Details = () => {
                     copy: "Add",
                     onClick: () => {
                         const uncheckedItems = list.items.map(x => x = { text: x.text, isDone: false });
-
-                        const listInfo = {
-                            title: list.title,
-                            description: list.description,
-                            category: list.category,
-                            type: list.type,
-                            shared: '0',
-                            items: uncheckedItems,
-                            _userId: user._id,
-                            _ownerName: list._ownerName,
-                            _ownerId: list._ownerId,
-                            _id: list._id
-                        }
+                        listInfo.items = uncheckedItems;
+                        listInfo.shared = '0';
+                        listInfo._userId = user._id;
 
                         listService.create(listInfo, user.accessToken)
                             .then(result => {
@@ -178,17 +142,7 @@ const Details = () => {
     }
 
     const likeHandler = e => {
-
-        if (likes.includes(user._id)) {
-            alert.show('You can only like once!');
-            return;
-        }
-        if (list._userId === user._userId) {
-            console.log('You can not like your own list!');
-            return;
-        }
         const newLikes = [...likes, user._id];
-
         listService.like(list._id, user.accessToken)
             .then(result => {
                 setLikes(newLikes);
@@ -203,8 +157,6 @@ const Details = () => {
                 setLikes(newLikes);
             })
     };
-
-
 
     const addForm = (
         <form onSubmit={onItemAdd}>
