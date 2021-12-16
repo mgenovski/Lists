@@ -36,7 +36,10 @@ const Create = () => {
 
     const onItemAdd = e => {
         e.preventDefault();
-        if (!value) return;
+        if (value.length < 2) {
+            alert.show('A list item should be at least two symbols long.');
+            return;
+        }
         addItem(value);
         setValue("");
     };
