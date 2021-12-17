@@ -43,34 +43,35 @@ const Edit = () => {
         let category = formData.get('category');
         let type = formData.get('type');
         let shared = formData.get('shared');
-        if(!shared) {
+        if (!shared) {
             shared = '0';
         }
 
-        
+
         if (title === '' || description === '') {
             alert.show('All fields are required!');
-        } else {
-
-            const listInfo = {
-                title,
-                description,
-                category,
-                type,
-                shared,
-                items: list.items,
-                _userId: list._userId,
-                _ownerName: list._ownerName,
-                _ownerId: list._ownerId,
-                _id: list._id,
-                likes: list.likes
-            }
-
-            listService.update(listInfo, user.accessToken)
-                .then(result => {
-                    navigate(`/details/${list._id}`);
-                })
+            return;
         }
+
+        const listInfo = {
+            title,
+            description,
+            category,
+            type,
+            shared,
+            items: list.items,
+            _userId: list._userId,
+            _ownerName: list._ownerName,
+            _ownerId: list._ownerId,
+            _id: list._id,
+            likes: list.likes
+        }
+
+        listService.update(listInfo, user.accessToken)
+            .then(result => {
+                navigate(`/details/${list._id}`);
+            })
+
     };
 
     const changeCategorySelect = (e) => {
@@ -115,14 +116,14 @@ const Edit = () => {
                         <option value="ol">Ordered List</option>
                     </select>
                 </div>
-                {list._userId===list._ownerId ?
-                (<div>
-                    <label htmlFor="shared">Sharing</label>
-                    <select name="shared" id="shared" value={sharedSelect} onChange={changeSharedSelect}>
-                        <option value="0">Private List</option>
-                        <option value="1">Public List</option>
-                    </select>
-                </div>) : ''}
+                {list._userId === list._ownerId ?
+                    (<div>
+                        <label htmlFor="shared">Sharing</label>
+                        <select name="shared" id="shared" value={sharedSelect} onChange={changeSharedSelect}>
+                            <option value="0">Private List</option>
+                            <option value="1">Public List</option>
+                        </select>
+                    </div>) : ''}
                 <button className='normal'>Edit list</button>
             </form>
         </div>
