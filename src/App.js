@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
+import PrivateRoute from './components/Common/PrivateRoute.js'
 import Footer from './components/Footer/Footer.js';
 import Header from './components/Header/Header.js';
 import Welcome from './components/Welcome/Welcome.js';
@@ -24,11 +25,11 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
-            <Route path="/create" element={<Create />} />
+            <Route path="/create" element={<PrivateRoute><Create /></PrivateRoute>} />
             <Route path="/all-lists" element={<AllLists />} />
-            <Route path="/my-lists" element={<MyLists />} />
+            <Route path="/my-lists" element={<PrivateRoute><MyLists /></PrivateRoute>} />
             <Route path="/details/:listId" element={<Details />} />
-            <Route path="/edit/:listId" element={<Edit />} />
+            <Route path="/edit/:listId" element={<PrivateRoute><Edit /></PrivateRoute>} />
           </Routes>
         </div>
         <Footer />
