@@ -1,14 +1,28 @@
-import { request } from './requester';
-
 const baseUrl = 'http://localhost:3030/data';
 
-export const getAll = () => request(`${baseUrl}/lists?where=shared%3D%221%22`)
+export const getAll = async () => {
+    let response = await fetch(`${baseUrl}/lists?where=shared%3D%221%22`);
+    let result = await response.json();
+    if(response.ok) {
+        return result;
+    }
+}
 
-export const getMine = (userId) => request(`${baseUrl}/lists?where=_userId%3D%22${userId}%22`)
+export const getMine = async (userId) => {
+    let response = await fetch(`${baseUrl}/lists?where=_userId%3D%22${userId}%22`);
+    let result = await response.json();
+    if(response.ok) {
+        return result;
+    }
+}
 
-
-export const getLikes = (listId) => request(`${baseUrl}/likes?where=listId%3D%22${listId}%22`)
-
+export const getLikes = async (listId) => {
+    let response = await fetch(`${baseUrl}/likes?where=listId%3D%22${listId}%22`);
+    let result = await response.json();
+    if(response.ok) {
+        return result;
+    }
+}
 export const create = async (listData, token) => {
     let response = await fetch(`${baseUrl}/lists`, {
         method: 'POST',
