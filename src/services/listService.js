@@ -11,7 +11,7 @@ export const getAll = async () => {
 }
 
 export const getMine = async (userId) => {
-    let response = await fetch(`${baseUrl}/lists?where=_userId%3D%22${userId}%22`);
+    let response = await fetch(`${baseUrl}/lists?where=_ownerId%3D%22${userId}%22`);
     let result = await response.json();
     if(response.ok) {
         return result;

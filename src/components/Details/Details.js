@@ -105,7 +105,7 @@ const Details = () => {
     };
 
     const onItemCheck = (index) => {
-        if (user._id !== list._userId) {
+        if (user._id !== list._ownerId) {
             return;
         }
         const newItems = [...list.items];
@@ -129,7 +129,7 @@ const Details = () => {
                         const uncheckedItems = list.items.map(x => x = { text: x.text, isDone: false });
                         listInfo.items = uncheckedItems;
                         listInfo.shared = '0';
-                        listInfo._userId = user._id;
+                        listInfo._userId = list._ownerId;
 
                         listService.create(listInfo, user.accessToken)
                             .then(result => {
@@ -170,8 +170,8 @@ const Details = () => {
             <div className='details'>
                 <div className='list'>
                     <h2>{list.title}</h2>
-                    {list.items ? list.items.map((item, index) => (<Item key={index} userId={list._userId} item={item} index={index} onItemRemove={onItemRemove} onItemCheck={onItemCheck} />)) : null}
-                    {user._id === list._userId ? addForm : ''}
+                    {list.items ? list.items.map((item, index) => (<Item key={index} userId={list._ownerId} item={item} index={index} onItemRemove={onItemRemove} onItemCheck={onItemCheck} />)) : null}
+                    {user._id === list._ownerId ? addForm : ''}
                 </div>
                 <div className='info'>
                     <h2>Information</h2>
@@ -180,7 +180,7 @@ const Details = () => {
                     {list._ownerName ? (<p>Created by: {list._ownerName}</p>) : ''}
                     <p>Likes: {likes?.length}</p>
                     <div>
-                        {user._id === list._userId
+                        {user._id === list._ownerId
                             ? (
                                 <>
                                     <button className='delete-list' onClick={deleteListHandler}>Delete list</button>
