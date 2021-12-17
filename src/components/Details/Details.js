@@ -178,7 +178,7 @@ const Details = () => {
                     <p>Description: {list.description}</p>
                     <p>Category: {list.category}</p>
                     {list._ownerName ? (<p>Created by: {list._ownerName}</p>) : ''}
-                    <p>Likes: {likes?.length}</p>
+                    {list.shared==='1' ? (<p>Likes: {likes?.length}</p>) : ''}
                     <div>
                         {user._id === list._ownerId
                             ? (
