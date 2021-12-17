@@ -50,7 +50,6 @@ const Create = () => {
         let title = formData.get('title');
         let description = formData.get('description');
         let category = formData.get('category');
-        let type = formData.get('type');
         let shared = formData.get('shared');
 
         //TODO Validation and notification
@@ -68,7 +67,6 @@ const Create = () => {
             title,
             description,
             category,
-            type,
             shared,
             items,
             _userId: user._id,
@@ -105,13 +103,6 @@ const Create = () => {
                                     <option value="Packing List">Packing List</option>
                                     <option value="Todo List">Todo List</option>
                                     <option value="Other">Other Checklist</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label htmlFor="type">Type</label>
-                                <select name="type" id="type">
-                                    <option value="ul">Unordered List</option>
-                                    <option value="ol">Ordered List</option>
                                 </select>
                             </div>
                             <div>

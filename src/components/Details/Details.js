@@ -38,7 +38,6 @@ const Details = () => {
         title: list.title,
         description: list.description,
         category: list.category,
-        type: list.type,
         shared: list.shared,
         items: list.items,
         _userId: list._userId,
