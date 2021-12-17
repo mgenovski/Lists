@@ -102,7 +102,7 @@ const Create = () => {
                                     <option value="Shopping List">Shopping List</option>
                                     <option value="Packing List">Packing List</option>
                                     <option value="Todo List">Todo List</option>
-                                    <option value="Other">Other Checklist</option>
+                                    <option value="Other Checklist">Other Checklist</option>
                                 </select>
                             </div>
                             <div>

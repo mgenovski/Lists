@@ -38,10 +38,10 @@ button.normal:hover {
 }
 
 ::placeholder {
-    color:    #ccc;
- }
+    color: #ccc;
+}
 
- button.small {
+button.small {
     background-color: #418d47;
     border-radius: 8px;
     padding: 7px 15px;
@@ -50,9 +50,9 @@ button.normal:hover {
     border: none;
     cursor: pointer;
     margin: 10px;
- }
+}
 
- button.del {
+button.del {
     background-color: #a82222;
     border-radius: 3px;
     padding: 3px 7px;
@@ -61,9 +61,9 @@ button.normal:hover {
     border: none;
     cursor: pointer;
     margin: 2px 10px;
- }
+}
 
- button.delete-list {
+button.delete-list {
     background-color: #a82222;
     border-radius: 3px;
     padding: 3px 7px;
@@ -72,9 +72,9 @@ button.normal:hover {
     border: none;
     cursor: pointer;
     margin: 2px 0;
- }
+}
 
- button.add-list {
+button.add-list {
     background-color: #245bc2;
     border-radius: 3px;
     padding: 3px 7px;
@@ -83,9 +83,9 @@ button.normal:hover {
     border: none;
     cursor: pointer;
     margin: 2px 0 2px 10px;
- }
- 
- a.edit-list {
+}
+
+a.edit-list {
     background-color: #245bc2;
     border-radius: 3px;
     padding: 3px 7px;
@@ -95,8 +95,8 @@ button.normal:hover {
     cursor: pointer;
     margin: 2px 0 2px 10px;
     text-decoration: none;
- }
- 
+}
+
 .details-button {
     background-color: #0090C5;
     border-radius: 8px;
@@ -126,10 +126,6 @@ button.normal:hover {
     font-size: 23px;
     color: rgb(143, 31, 31);
     font-weight: bold;
-}
-
-.is-done {
-    text-decoration: line-through;
 }
 
 .pointer-cursor {

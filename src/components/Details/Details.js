@@ -159,8 +159,10 @@ const Details = () => {
 
     const addForm = (
         <form onSubmit={onItemAdd}>
-            <div><input type="text" id="item" name="item" placeholder="Item..." /></div>
-            <div><button className='small'>Add item</button></div>
+            <div className='form-wrapper'>
+                <input type="text" id="item" name="item" placeholder="Item..." />
+                <button className='small'>Add item</button>
+            </div>
         </form>
     )
 
@@ -174,10 +176,10 @@ const Details = () => {
                 </div>
                 <div className='info'>
                     <h2>Information</h2>
-                    <p>Description: {list.description}</p>
-                    <p>Category: {list.category}</p>
-                    {list._ownerName ? (<p>Created by: {list._ownerName}</p>) : ''}
-                    {list.shared==='1' ? (<p>Likes: {likes?.length}</p>) : ''}
+                    <p><b>Description:</b> {list.description}</p>
+                    <p><b>Category:</b> {list.category}</p>
+                    {list._ownerName ? (<p><b>Created by:</b> {list._ownerName}</p>) : ''}
+                    {list.shared === '1' ? (<p>Likes: {likes?.length}</p>) : ''}
                     <div>
                         {user._id === list._ownerId
                             ? (
