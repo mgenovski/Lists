@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 
 import * as listService from '../../services/listService.js';
 import { useAuthContext } from '../../contexts/AuthContext';
@@ -16,6 +17,7 @@ const Edit = () => {
     const [categorySelect, setCategorySelect] = useState('');
     const [typeSelect, setTypeSelect] = useState('');
     const [sharedSelect, setSharedSelect] = useState('');
+    const alert = useAlert();
 
     useEffect(() => {
         listService.getOne(listId)
@@ -47,7 +49,7 @@ const Edit = () => {
 
         //TODO Validation and notification
         if (title === '' || description === '') {
-            console.log('All fields are required.')
+            alert.show('All fields are required!');
         } else {
 
             const listInfo = {
