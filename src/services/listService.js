@@ -5,6 +5,8 @@ export const getAll = async () => {
     let result = await response.json();
     if(response.ok) {
         return result;
+    } else {
+        throw result;
     }
 }
 
@@ -13,6 +15,8 @@ export const getMine = async (userId) => {
     let result = await response.json();
     if(response.ok) {
         return result;
+    } else {
+        throw result;
     }
 }
 
@@ -21,6 +25,8 @@ export const getLikes = async (listId) => {
     let result = await response.json();
     if(response.ok) {
         return result;
+    } else {
+        throw result;
     }
 }
 export const create = async (listData, token) => {
