@@ -47,7 +47,7 @@ const Edit = () => {
             shared = '0';
         }
 
-        //TODO Validation and notification
+        
         if (title === '' || description === '') {
             alert.show('All fields are required!');
         } else {
