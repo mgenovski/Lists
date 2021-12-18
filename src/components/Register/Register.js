@@ -24,7 +24,6 @@ const Register = () => {
             return;
         }
 
-        //ToDO Email validation
         if (email === '' || password === '' || name === '') {
             alert.show("All fields are required!");
             return;
