@@ -30,6 +30,13 @@ const Register = () => {
             return;
         }
 
+        if(!email.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )) {
+            alert.show('Please enter a valid email.');
+            return;
+        }
+
         authService.register(email, password, name)
             .then(authData => {
                 login(authData);
