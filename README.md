@@ -1,6 +1,5 @@
 # Lists
 
-IN PROGRESS...\
 This is my project for SoftUni ReactJS course.
 
 ## Available Scripts
